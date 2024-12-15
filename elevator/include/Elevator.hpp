@@ -7,10 +7,8 @@
 #include "State.hpp"
 
 class Elevator {
- private:
-  std::unique_ptr<State> state;
-
  public:
+  std::unique_ptr<State> state;
   Elevator(std::unique_ptr<State> initialState) {
     change_state(std::move(initialState));
   }
