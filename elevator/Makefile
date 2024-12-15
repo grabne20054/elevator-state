@@ -1,41 +1,34 @@
 ########################################################
-# main build target filename and source:
+# Main build target filename and source:
 
 TARGET = $(BUILDDIR)/main.out
-SRC =  $(SRCDIR)/LineSegment.hpp
+SRC = $(SRCDIR)/main.cpp $(SRCDIR)/Ground.cpp $(SRCDIR)/FirstFloor.cpp $(SRCDIR)/SecondFloor.cpp
+
+TESTSRC = $(TESTDIR)/test.cpp $(BUILDDIR)/Ground.o $(BUILDDIR)/FirstFloor.o $(BUILDDIR)/SecondFloor.o
 
 ########################################################
-# main test filename:
+# Compiler flags:
+CFLAGS = -Wall -std=c++17 -I $(INCDIR)
 
-TESTSRC = $(TESTDIR)/test.cpp $(BUILDDIR)/LineSegment.o $(BUILDDIR)/PolygonalChain.o $(BUILDDIR)/RightTriangle.o $(BUILDDIR)/Square.o
-
-
-# compiler flags:
-CFLAGS =  -Wall -std=c++17 -I $(SRCDIR)
-
-# linker flags
-#    add -lm to use mathematical funtions
-LDFLAGS = -lm
+# Linker flags (optional):
+LDFLAGS = 
 
 ########################################################
-# do not change
-
+# Do not change:
 include ../tools/Makefile
 
 ########################################################
-# project specific targets
-#   adapt / expand as needed
-$(TARGET): $(BUILDDIR) $(SRC)
+# Project-specific targets
+# Adapt/expand as needed
+$(TARGET): $(SRC)
 	$(CXX) $(CFLAGS) -o $(TARGET) $(SRC) $(LDFLAGS)
 
-$(BUILDDIR)/LineSegment.o: $(BUILDDIR) $(SRCDIR)/LineSegment.cpp
-	$(CXX) $(CFLAGS) -o $(BUILDDIR)/LineSegment.o -c $(SRCDIR)/LineSegment.cpp $(LDFLAGS)
+$(BUILDDIR)/Ground.o: $(BUILDDIR) $(SRCDIR)/Ground.cpp
+	$(CXX) $(CFLAGS) -o $(BUILDDIR)/Ground.o -c $(SRCDIR)/Ground.cpp $(LDFLAGS)
 
-$(BUILDDIR)/PolygonalChain.o: $(BUILDDIR) $(SRCDIR)/PolygonalChain.cpp
-	$(CXX) $(CFLAGS) -o $(BUILDDIR)/PolygonalChain.o -c $(SRCDIR)/PolygonalChain.cpp $(LDFLAGS)
+$(BUILDDIR)/FirstFloor.o: $(BUILDDIR) $(SRCDIR)/FirstFloor.cpp
+	$(CXX) $(CFLAGS) -o $(BUILDDIR)/FirstFloor.o -c $(SRCDIR)/FirstFloor.cpp $(LDFLAGS)
 
-$(BUILDDIR)/RightTriangle.o: $(BUILDDIR) $(SRCDIR)/RightTriangle.cpp
-	$(CXX) $(CFLAGS) -o $(BUILDDIR)/RightTriangle.o -c $(SRCDIR)/RightTriangle.cpp $(LDFLAGS)
+$(BUILDDIR)/SecondFloor.o: $(BUILDDIR) $(SRCDIR)/SecondFloor.cpp
+	$(CXX) $(CFLAGS) -o $(BUILDDIR)/SecondFloor.o -c $(SRCDIR)/SecondFloor.cpp $(LDFLAGS)
 
-$(BUILDDIR)/Square.o: $(BUILDDIR) $(SRCDIR)/Square.cpp
-	$(CXX) $(CFLAGS) -o $(BUILDDIR)/Square.o -c $(SRCDIR)/Square.cpp $(LDFLAGS)

@@ -5,6 +5,7 @@ RM = rm
 
 BUILDDIR = build
 SRCDIR = src
+INCDIR = include
 TESTDIR = tests
 SCRIPTDIR = ../tools
 
